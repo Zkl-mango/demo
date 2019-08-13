@@ -3,7 +3,7 @@ package com.springboot.demo.controller;
 import com.springboot.demo.entity.UserEntity;
 import com.springboot.demo.service.UserService;
 import com.springboot.demo.util.RedisUtil;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -18,7 +18,7 @@ public class LoginController {
     @Resource
     RedisUtil redisUtil;
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public Map<String,Object> login(String username,String password) {
         Map<String,Object> map = new HashMap<>();
         UserEntity user = userService.getUserByUserName(username);
