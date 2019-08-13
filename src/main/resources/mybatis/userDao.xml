@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd//mybatis-3-mapper.dtd">
+<mapper namespace="UserDao">
+
+    <insert id="addUser" parameterType="UserEntity">
+        INSERT INTO user (id,username,password,nickname) VALUES (#{id},#{username},#{password},#{nickname});
+    </insert>
+
+    <update id="updateUser" parameterType="UserEntity" >
+        UPDATE user SET
+        <if test="#{username}!=null">username=#{username},</if>
+        <if test="#{password}!=null">password=#{password},</if>
+        <if test="#{nickname}!=null"> nickname=#{nickname}</if>
+        WHERE id=#{id};
+    </update>
+
+    <delete id="deleteUser" parameterType="UserEntity">
+        DELETE FROM user WHERE id = #{id};
+    </delete>
+
+    <select id="selectUserById" parameterType="string" resultMap="userMap">
+        SELECT id,username,password,nickname
+        FROM user
+        WHERE id = #{id};
+    </select>
+
+    <select id="selectUserByUserName" parameterType="string" resultMap="userMap">
+        SELECT id,username,password,nickname
+        FROM user
+        WHERE username = #{username};
+    </select>
+    
+    <resultMap id="userMap" type="UserEntity" >
+        <id column="id" property="id"/>
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="nickname" property="nickname" />
+    </resultMap>
+</mapper>

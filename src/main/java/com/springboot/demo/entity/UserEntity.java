@@ -1,7 +1,10 @@
 package com.springboot.demo.entity;
 
+import org.apache.ibatis.type.Alias;
+
 import java.io.Serializable;
 
+@Alias(value = "UserEntity")
 public class UserEntity implements Serializable {
 
     private String id;
